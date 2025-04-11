@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Customer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #1a1a1a, #2b2b2b);
+      color: #e6e6e6;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(0, 66, 37, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #d1b100;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #d1b100;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #004225;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #003218;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #d1b100;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #f5e663;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Add Customer</h2>
+    <form id="customerForm">
+      <label for="name">Customer Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="carNumber">Car Number Plate:</label>
+      <input type="text" id="carNumber" required />
+
+      <label for="expiryDate">License Expiry Date:</label>
+      <input type="date" id="expiryDate" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone" required />
+
+      <button type="submit">💾 Save Customer</button>
+    </form>
+
+    <a href="admin.html">← Back to Dashboard</a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("customerForm");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let carNumber = document.getElementById("carNumber").value;
+        let expiryDate = document.getElementById("expiryDate").value;
+        let phone = document.getElementById("phone").value;
+
+        let customer = {
+          name: name,
+          carNumber: carNumber,
+          expiryDate: expiryDate,
+          phone: phone
+        };
+
+        let customers = JSON.parse(localStorage.getItem("customers")) || [];
+        customers.push(customer);
+        localStorage.setItem("customers", JSON.stringify(customers));
+
+        alert("Customer added successfully!");
+        window.location.href = "admin.html";
+      });
+    });
+  </script>
+</body>
+</html>
